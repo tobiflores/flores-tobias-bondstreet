@@ -1,0 +1,96 @@
+classDiagram
+    class Usuario {
+        +id
+        +nombre
+        +email
+        +password
+        +rol
+        +registrarse()
+        +iniciarSesion()
+    }
+    class Cliente {
+        +telefono
+        +direccion
+        +verCatalogo()
+        +agregarAlCarrito()
+        +confirmarPedido()
+        +cancelarPedido()
+        +verHistorial()
+    }
+    class Administrador {
+        +gestionarProductos()
+        +gestionarStock()
+        +gestionarUsuarios()
+        +gestionarPromociones()
+        +actualizarEstadoPedido()
+    }
+    class Producto {
+        +id
+        +nombre
+        +descripcion
+        +precio
+        +imagen
+        +categoria
+        +crear()
+        +modificar()
+        +eliminar()
+    }
+    class StockProducto {
+        +id
+        +idProducto
+        +talle
+        +color
+        +cantidad
+        +hayStock(cantidad)
+        +descontar(cantidad)
+    }
+    class Pedido {
+        +id
+        +idCliente
+        +fecha
+        +estado
+        +total
+        +idCupon
+        +confirmar()
+        +cancelar()
+        +cambiarEstado()
+        +calcularTotal()
+    }
+    class DetallePedido {
+        +id
+        +idPedido
+        +idProducto
+        +talle
+        +color
+        +cantidad
+        +precioUnitario
+        +calcularSubtotal()
+    }
+    class Cupon {
+        +id
+        +codigo
+        +porcentajeDescuento
+        +fechaVencimiento
+        +activo
+        +esValido()
+        +aplicarDescuento(monto)
+    }
+    class Envio {
+        +id
+        +idPedido
+        +direccionEntrega
+        +estadoDespacho
+        +fechaDespacho
+        +codigoSeguimiento
+        +despachar()
+        +actualizarSeguimiento()
+    }
+    Usuario <|-- Cliente
+    Usuario <|-- Administrador
+    Cliente "1" --> "0..*" Pedido : realiza
+    Pedido "1" *-- "1..*" DetallePedido : contiene
+    DetallePedido "0..*" --> "1" Producto : refiere a
+    Producto "1" *-- "1..*" StockProducto : tiene variantes
+    Pedido "0..*" --> "0..1" Cupon : aplica
+    Pedido "1" --> "0..1" Envio : genera
+    Administrador ..> Producto : gestiona
