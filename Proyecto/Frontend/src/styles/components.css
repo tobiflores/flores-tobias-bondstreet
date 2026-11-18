@@ -1,0 +1,376 @@
+/* ===== Tarjeta de producto: sticker pegado en el muro ===== */
+.tarjeta {
+    background-color: var(--panel);
+    border: 2px solid var(--borde);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--sombra-dura);
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.grilla .tarjeta:nth-child(odd) {
+    transform: rotate(-1deg);
+}
+
+.grilla .tarjeta:nth-child(even) {
+    transform: rotate(1deg);
+}
+
+.grilla .tarjeta:hover {
+    transform: rotate(0deg) translateY(-6px);
+    border-color: var(--rosa);
+    box-shadow: 8px 8px 0 rgba(252, 70, 245, 0.35);
+}
+
+.tarjeta__imagen {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-bottom: 2px solid var(--borde);
+}
+
+.tarjeta__imagen--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--fuente-graffiti);
+    font-size: 4rem;
+    color: var(--tinta);
+    background:
+        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.25), transparent 45%),
+        linear-gradient(135deg, var(--rosa), var(--rojo) 55%, var(--verde));
+}
+
+.grilla .tarjeta:nth-child(3n) .tarjeta__imagen--placeholder {
+    background:
+        radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.22), transparent 45%),
+        linear-gradient(200deg, var(--verde), var(--rosa) 70%);
+}
+
+.grilla .tarjeta:nth-child(3n + 2) .tarjeta__imagen--placeholder {
+    background:
+        radial-gradient(circle at 40% 70%, rgba(255, 255, 255, 0.2), transparent 45%),
+        linear-gradient(320deg, var(--rojo), var(--rosa) 60%, var(--verde) 115%);
+}
+
+.tarjeta__cuerpo {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    flex: 1;
+}
+
+.tarjeta__categoria {
+    align-self: flex-start;
+    font-family: var(--fuente-mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--tinta);
+    background-color: var(--verde);
+    padding: 0.12rem 0.5rem;
+    transform: rotate(-2deg);
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.9);
+}
+
+.tarjeta__nombre {
+    font-size: 1.1rem;
+    color: var(--texto);
+    margin-top: 0.25rem;
+}
+
+.tarjeta__precio {
+    font-family: var(--fuente-mono);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--rosa);
+}
+
+.tarjeta__acciones {
+    margin-top: auto;
+    padding-top: 0.85rem;
+}
+
+/* ===== Cinta marquee: cinta de peligro de la galería ===== */
+.marquee {
+    overflow: hidden;
+    width: 110%;
+    margin: 2.8rem -5% 0;
+    transform: rotate(-1.4deg);
+    background-color: var(--rosa);
+    border-top: 3px solid var(--tinta);
+    border-bottom: 3px solid var(--tinta);
+    box-shadow: 0 5px 0 rgba(0, 0, 0, 0.85);
+}
+
+.marquee__pista {
+    display: flex;
+    width: max-content;
+    animation: desfilar 22s linear infinite;
+}
+
+.marquee__pista span {
+    font-family: var(--fuente-mono);
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--tinta);
+    white-space: nowrap;
+    padding: 0.55rem 0;
+}
+
+@keyframes desfilar {
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* ===== Modal: flyer pegado ===== */
+.modal__fondo {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(5, 5, 7, 0.78);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 50;
+}
+
+.modal {
+    background-color: var(--panel);
+    border: 3px solid var(--papel);
+    box-shadow: 10px 10px 0 var(--rosa);
+    width: min(540px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: subir 0.25s ease both;
+}
+
+.modal__encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.3rem;
+    border-bottom: 2px dashed var(--borde);
+}
+
+.modal__titulo {
+    font-size: 1.35rem;
+}
+
+.modal__cerrar,
+.notificacion__cerrar {
+    background: none;
+    border: 2px solid transparent;
+    color: var(--texto-suave);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.25rem 0.45rem;
+    font-family: var(--fuente-mono);
+}
+
+.modal__cerrar:hover,
+.notificacion__cerrar:hover {
+    color: var(--rojo);
+    border-color: var(--rojo);
+    transform: rotate(90deg);
+}
+
+.modal__cerrar:focus-visible,
+.notificacion__cerrar:focus-visible {
+    outline: 3px dashed var(--verde);
+}
+
+.modal__contenido {
+    padding: 1.3rem;
+}
+
+/* ===== Confirmación ===== */
+.confirmar__mensaje {
+    margin-bottom: 1.3rem;
+}
+
+.confirmar__acciones {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+/* ===== Detalle de producto ===== */
+.detalle {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.detalle__fila dt {
+    font-family: var(--fuente-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--verde);
+}
+
+.detalle__fila dd {
+    margin: 0;
+}
+
+.detalle__precio {
+    font-family: var(--fuente-mono);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--rosa);
+}
+
+/* ===== Formulario ===== */
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.formulario__campo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.formulario__campo label {
+    font-family: var(--fuente-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--texto);
+}
+
+.formulario__campo input,
+.formulario__campo textarea,
+.formulario__campo select {
+    font-family: var(--fuente-texto);
+    font-size: 0.95rem;
+    padding: 0.6rem 0.8rem;
+    border: 2px solid var(--borde);
+    border-radius: 0;
+    background-color: var(--panel-claro);
+    color: var(--texto);
+    resize: vertical;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.formulario__campo input:focus-visible,
+.formulario__campo textarea:focus-visible,
+.formulario__campo select:focus-visible {
+    outline: none;
+    border-color: var(--rosa);
+    box-shadow: 4px 4px 0 rgba(252, 70, 245, 0.4);
+}
+
+.formulario__campo input[aria-invalid="true"],
+.formulario__campo textarea[aria-invalid="true"] {
+    border-color: var(--rojo);
+}
+
+.formulario__error {
+    font-family: var(--fuente-mono);
+    color: var(--rojo);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+/* ===== Loader: lata agitándose ===== */
+.loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 3.2rem 1rem;
+    color: var(--texto-suave);
+    font-family: var(--fuente-mono);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.loader__spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--tinta);
+    background: linear-gradient(135deg, var(--rosa), var(--rojo));
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.9);
+    animation: sacudir 0.7s ease-in-out infinite;
+}
+
+@keyframes sacudir {
+    0%,
+    100% {
+        transform: rotate(-8deg);
+    }
+    50% {
+        transform: rotate(8deg) translateY(-4px);
+    }
+}
+
+/* ===== Notificaciones: stickers que se pegan ===== */
+.notificaciones {
+    position: fixed;
+    top: 5rem;
+    right: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    z-index: 100;
+    width: min(340px, calc(100vw - 2rem));
+}
+
+.notificacion {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.6rem;
+    padding: 0.85rem 1rem;
+    border: 2px solid var(--tinta);
+    background-color: var(--papel);
+    color: var(--tinta);
+    font-weight: 500;
+    box-shadow: var(--sombra-dura);
+    animation: estampar 0.3s cubic-bezier(0.2, 1.4, 0.5, 1) both;
+}
+
+.notificacion--exito {
+    --rotacion: -1.5deg;
+    border-left: 10px solid var(--verde);
+}
+
+.notificacion--error {
+    --rotacion: 1.5deg;
+    border-left: 10px solid var(--rojo);
+}
+
+.notificacion .notificacion__cerrar {
+    color: var(--tinta);
+}
+
+/* ===== Agregar al carrito (dentro del modal de producto) ===== */
+.agregar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.3rem;
+    padding-top: 1.1rem;
+    border-top: 2px dashed var(--borde);
+}
+
+.agregar__opciones {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 0.8rem;
+}

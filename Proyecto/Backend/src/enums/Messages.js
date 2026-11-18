@@ -5,7 +5,14 @@ export const Messages = Object.freeze({
     DUPLICATED_RESOURCE: "El recurso ya existe.",
     INVALID_ID: "El id proporcionado es inválido.",
     ROUTE_NOT_FOUND: "La ruta solicitada no existe.",
-    INTERNAL_ERROR: "Ocurrió un error interno en el servidor."
+    INTERNAL_ERROR: "Ocurrió un error interno en el servidor.",
+    INVALID_EMAIL: "El formato del email es inválido.",
+    WEAK_PASSWORD: "La contraseña debe tener al menos 8 caracteres y un caracter especial.",
+    DUPLICATED_EMAIL: "Ya existe un usuario registrado con ese email.",
+    INVALID_CREDENTIALS: "Email o contraseña incorrectos.",
+    UNAUTHORIZED: "Tenés que iniciar sesión para realizar esta acción.",
+    FORBIDDEN: "No tenés permisos para realizar esta acción.",
+    EMPTY_ORDER: "El pedido debe contener al menos un producto."
 });
 
 export default Messages;

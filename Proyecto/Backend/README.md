@@ -29,13 +29,29 @@ src/
 
 ## CRUD de Producto
 
-| Método | Ruta                 | Descripción                 |
-|--------|----------------------|-----------------------------|
-| GET    | `/api/productos`     | Obtener todos los productos |
-| GET    | `/api/productos/:id` | Obtener un producto por id  |
-| POST   | `/api/productos`     | Crear un producto           |
-| PUT    | `/api/productos/:id` | Modificar un producto       |
-| DELETE | `/api/productos/:id` | Eliminar un producto        |
+| Método | Ruta                 | Descripción                 | Acceso |
+|--------|----------------------|-----------------------------|--------|
+| GET    | `/api/productos`     | Obtener todos los productos | Público |
+| GET    | `/api/productos/:id` | Obtener un producto por id  | Público |
+| POST   | `/api/productos`     | Crear un producto           | Solo admin |
+| PUT    | `/api/productos/:id` | Modificar un producto       | Solo admin |
+| DELETE | `/api/productos/:id` | Eliminar un producto        | Solo admin |
+
+## Autenticación y pedidos
+
+| Método | Ruta                 | Descripción                                   | Acceso |
+|--------|----------------------|-----------------------------------------------|--------|
+| POST   | `/api/auth/registro` | Registrar un cliente (devuelve token)         | Público |
+| POST   | `/api/auth/login`    | Iniciar sesión (devuelve token)               | Público |
+| POST   | `/api/auth/logout`   | Cerrar sesión                                 | Autenticado |
+| POST   | `/api/pedidos`       | Crear pedido con items (talle/color/cantidad) | Autenticado |
+| GET    | `/api/pedidos`       | Ver los pedidos propios                       | Autenticado |
+
+- Las rutas protegidas esperan el header `Authorization: Bearer <token>` (sesiones en memoria).
+- Los middlewares `autenticar` y `soloAdmin` (en `middlewares/auth.js`) controlan el acceso.
+- El precio de cada item del pedido se toma **siempre del servidor**, nunca del cliente.
+- Validaciones de registro: email con formato válido y único; contraseña de mínimo 8 caracteres con al menos un caracter especial.
+- **Administrador de prueba**: `admin@bondstreet.com.ar` / `Admin#1234` (los registros nuevos siempre son clientes).
 
 Body esperado para POST/PUT:
 
