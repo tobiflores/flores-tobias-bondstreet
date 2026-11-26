@@ -12,7 +12,17 @@ export const Messages = Object.freeze({
     INVALID_CREDENTIALS: "Email o contraseña incorrectos.",
     UNAUTHORIZED: "Tenés que iniciar sesión para realizar esta acción.",
     FORBIDDEN: "No tenés permisos para realizar esta acción.",
-    EMPTY_ORDER: "El pedido debe contener al menos un producto."
+    EMPTY_ORDER: "El pedido debe contener al menos un producto.",
+    ADDRESS_REQUIRED: "La dirección de entrega es obligatoria.",
+    VARIANT_NOT_FOUND: "El talle/color seleccionado no existe para ese producto.",
+    INSUFFICIENT_STOCK: "No hay stock suficiente para el talle y color elegidos.",
+    DUPLICATED_VARIANT: "Ya existe esa combinación de talle y color para el producto.",
+    STOCK_NOT_FOUND: "La variante de stock no existe.",
+    ORDER_NOT_FOUND: "El pedido no existe.",
+    ORDER_NOT_CANCELABLE: "El pedido no se puede cancelar en su estado actual.",
+    INVALID_STATE_TRANSITION: "El pedido no puede pasar a ese estado.",
+    CUPON_INVALID: "El cupón no existe, está inactivo o ya venció.",
+    DUPLICATED_CUPON: "Ya existe un cupón con ese código."
 });
 
 export default Messages;

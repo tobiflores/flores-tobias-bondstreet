@@ -44,6 +44,13 @@ function Header() {
                             )}
                         </NavLink>
                     </li>
+                    {usuario && (
+                        <li>
+                            <NavLink to="/mis-pedidos" className="header__link">
+                                Mis pedidos
+                            </NavLink>
+                        </li>
+                    )}
                     {esAdmin && (
                         <li>
                             <NavLink to="/admin" className="header__link">

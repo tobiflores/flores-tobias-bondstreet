@@ -31,7 +31,11 @@ src/
 
 - **Inicio** (`/`): respeta el wireframe original — header con logo y menú, sección de bienvenida (hero), productos destacados con botón "Más info" y sección "Sobre nosotros"; footer con ubicación, mail, teléfono y redes. Suma cinta marquee y chips de categorías (derivadas dinámicamente de la API).
 - **Catálogo** (`/catalogo`): grilla de productos desde la API con buscador por nombre/categoría. El detalle de cada producto permite elegir **talle, color y cantidad** y agregarlo al carrito.
-- **Carrito** (`/carrito`): items con talle/color, cantidades editables, quitar con confirmación, total y **confirmación del pedido** contra la API (requiere sesión iniciada).
+- **Carrito** (`/carrito`): items con talle/color, cantidades editables, quitar con confirmación, dirección de entrega, cupón de descuento y **confirmación del pedido** contra la API (requiere sesión iniciada). Los talles/colores que se ofrecen salen del stock real.
+- **Mis pedidos** (`/mis-pedidos`): historial del cliente con estado, detalle, envío y código de seguimiento. Permite cancelar mientras el pedido no fue despachado.
+- **Admin → Pedidos** (`/admin/pedidos`): todos los pedidos; el admin los avanza por el flujo Confirmado → En preparación → Enviado → Entregado o los cancela.
+- **Admin → Cupones** (`/admin/cupones`): alta y activación/desactivación de cupones.
+- **Admin → Stock**: desde la tabla de productos, botón "Stock" para editar cantidades y agregar variantes.
 - **Login** (`/login`) y **Registro** (`/registro`): autenticación con validaciones (email válido, contraseña de 8+ caracteres con caracter especial).
 - **Administración** (`/admin`): CRUD completo de productos. **Solo accesible con rol administrador** (ruta protegida + API protegida con token). Credenciales de prueba: `admin@bondstreet.com.ar` / `Admin#1234`.
 

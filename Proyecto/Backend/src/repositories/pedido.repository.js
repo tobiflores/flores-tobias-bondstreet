@@ -38,6 +38,21 @@ class PedidoRepository {
                 detalles: detalles.filter((detalle) => detalle.idPedido === pedido.id)
             }));
     }
+
+    findAll() {
+        return pedidos.map((pedido) => ({
+            pedido,
+            detalles: detalles.filter((detalle) => detalle.idPedido === pedido.id)
+        }));
+    }
+
+    findById(id) {
+        return pedidos.find((pedido) => pedido.id === id) ?? null;
+    }
+
+    findDetalles(idPedido) {
+        return detalles.filter((detalle) => detalle.idPedido === idPedido);
+    }
 }
 
 export default new PedidoRepository();

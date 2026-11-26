@@ -44,8 +44,35 @@ src/
 | POST   | `/api/auth/registro` | Registrar un cliente (devuelve token)         | Público |
 | POST   | `/api/auth/login`    | Iniciar sesión (devuelve token)               | Público |
 | POST   | `/api/auth/logout`   | Cerrar sesión                                 | Autenticado |
-| POST   | `/api/pedidos`       | Crear pedido con items (talle/color/cantidad) | Autenticado |
+| POST   | `/api/pedidos`       | Crear pedido (items, dirección, cupón opcional) | Autenticado |
 | GET    | `/api/pedidos`       | Ver los pedidos propios                       | Autenticado |
+| PUT    | `/api/pedidos/:id/cancelar` | Cancelar un pedido (dueño o admin)     | Autenticado |
+| GET    | `/api/pedidos/todos` | Ver todos los pedidos                         | Solo admin |
+| PUT    | `/api/pedidos/:id/estado` | Avanzar el pedido al siguiente estado    | Solo admin |
+
+## Stock y cupones
+
+| Método | Ruta                       | Descripción                              | Acceso |
+|--------|----------------------------|------------------------------------------|--------|
+| GET    | `/api/productos/:id/stock` | Variantes (talle/color/cantidad)         | Público |
+| POST   | `/api/productos/:id/stock` | Agregar una variante                     | Solo admin |
+| PUT    | `/api/stock/:id`           | Actualizar la cantidad de una variante   | Solo admin |
+| POST   | `/api/cupones/validar`     | Validar un cupón antes de comprar        | Autenticado |
+| GET    | `/api/cupones`             | Listar cupones                           | Solo admin |
+| POST   | `/api/cupones`             | Crear cupón                              | Solo admin |
+| PUT    | `/api/cupones/:id/alternar`| Activar / desactivar cupón               | Solo admin |
+
+## Reglas de negocio (validadas en el backend)
+
+- No se puede confirmar un pedido sin dirección ni sin productos.
+- El talle/color elegido tiene que existir para ese producto, y la cantidad no puede superar el stock.
+- Al confirmar se **descuenta el stock**; al cancelar se **devuelve**.
+- El total lo calcula el servidor con los precios reales; el descuento solo aplica con un cupón activo y no vencido.
+- Flujo de estados: Confirmado → En preparación → Enviado → Entregado (solo el admin lo avanza). Al pasar a *Enviado* se genera el código de seguimiento del envío.
+- Solo el dueño (o el admin) puede cancelar, y únicamente si el pedido no fue despachado.
+- Cupones de prueba: `BOND10` (válido), `PUNK20` (vencido), `GRAFF15` (inactivo).
+
+## Notas
 
 - Las rutas protegidas esperan el header `Authorization: Bearer <token>` (sesiones en memoria).
 - Los middlewares `autenticar` y `soloAdmin` (en `middlewares/auth.js`) controlan el acceso.
@@ -88,5 +115,5 @@ Error:
 ## Manejo de errores
 
 - `enums/Messages.js`: enum con todos los mensajes de la aplicación.
-- `exceptions/AppError.js`: clase base + `BadRequestError` (400), `NotFoundError` (404) y `ConflictError` (409).
+- `exceptions/AppError.js`: clase base + `BadRequestError` (400), `UnauthorizedError` (401), `ForbiddenError` (403), `NotFoundError` (404) y `ConflictError` (409).
 - `middlewares/errorHandler.js`: middleware centralizado que traduce los errores al formato uniforme de respuesta.

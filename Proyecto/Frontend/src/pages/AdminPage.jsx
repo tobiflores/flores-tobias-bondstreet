@@ -12,6 +12,8 @@ import ProductForm from "../components/ProductForm.jsx";
 import ConfirmDialog from "../components/ConfirmDialog.jsx";
 import Modal from "../components/Modal.jsx";
 import Loader from "../components/Loader.jsx";
+import AdminNav from "../components/AdminNav.jsx";
+import StockManager from "../components/StockManager.jsx";
 
 function AdminPage() {
     const [productos, setProductos] = useState([]);
@@ -20,6 +22,7 @@ function AdminPage() {
     const [creando, setCreando] = useState(false);
     const [editando, setEditando] = useState(null);
     const [eliminando, setEliminando] = useState(null);
+    const [gestionandoStock, setGestionandoStock] = useState(null);
     const notificaciones = useNotificaciones();
     const { token } = useAuth();
 
@@ -90,6 +93,7 @@ function AdminPage() {
                     + Nuevo producto
                 </button>
             </div>
+            <AdminNav />
 
             {cargando ? (
                 <Loader mensaje="Cargando productos..." />
@@ -126,6 +130,13 @@ function AdminPage() {
                                             </button>
                                             <button
                                                 type="button"
+                                                className="boton boton--secundario boton--chico"
+                                                onClick={() => setGestionandoStock(producto)}
+                                            >
+                                                Stock
+                                            </button>
+                                            <button
+                                                type="button"
                                                 className="boton boton--peligro boton--chico"
                                                 onClick={() => setEliminando(producto)}
                                             >
@@ -154,6 +165,12 @@ function AdminPage() {
                         enviando={enviando}
                         textoBoton="Guardar cambios"
                     />
+                </Modal>
+            )}
+
+            {gestionandoStock && (
+                <Modal titulo={`Stock: ${gestionandoStock.nombre}`} onClose={() => setGestionandoStock(null)}>
+                    <StockManager producto={gestionandoStock} />
                 </Modal>
             )}
 

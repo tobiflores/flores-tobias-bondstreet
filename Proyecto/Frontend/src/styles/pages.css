@@ -385,6 +385,10 @@
     flex-wrap: wrap;
 }
 
+.tabla__acciones .boton {
+    white-space: nowrap;
+}
+
 /* ===== Autenticación ===== */
 .auth {
     display: flex;
@@ -465,4 +469,174 @@
 
 .carrito__confirmado strong {
     color: var(--verde);
+}
+
+/* ===== Checkout ===== */
+.checkout {
+    display: grid;
+    grid-template-columns: 1fr minmax(260px, 340px);
+    gap: 2rem;
+    margin-top: 1.8rem;
+    align-items: start;
+}
+
+.checkout__datos {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+}
+
+.checkout__cupon {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.checkout__cupon input {
+    flex: 1;
+    text-transform: uppercase;
+}
+
+.checkout__resumen {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 1.3rem;
+    background-color: var(--papel);
+    color: var(--tinta);
+    border: 2px solid var(--tinta);
+    box-shadow: 6px 6px 0 var(--rosa);
+    transform: rotate(0.6deg);
+    font-family: var(--fuente-mono);
+}
+
+.checkout__resumen p {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.checkout__resumen p > span,
+.checkout__resumen p > strong {
+    white-space: nowrap;
+}
+
+.checkout__resumen .carrito__total {
+    padding-top: 0.55rem;
+    border-top: 2px dashed var(--tinta);
+}
+
+.checkout__resumen .carrito__total strong {
+    color: var(--tinta);
+}
+
+.checkout__descuento span {
+    color: #1a8c00;
+    font-weight: 700;
+}
+
+@media (max-width: 720px) {
+    .checkout {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Mis pedidos: tickets ===== */
+.pedidos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.6rem;
+}
+
+.pedido {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 1.3rem;
+    background-color: var(--panel);
+    border: 2px solid var(--borde);
+    border-left: 6px solid var(--rosa);
+    box-shadow: var(--sombra-dura);
+    animation: subir 0.45s ease both;
+}
+
+.pedido:nth-child(2) { animation-delay: 0.07s; }
+.pedido:nth-child(3) { animation-delay: 0.14s; }
+.pedido:nth-child(4) { animation-delay: 0.21s; }
+
+.pedido__encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+}
+
+.pedido__titulo {
+    font-size: 1.3rem;
+}
+
+.pedido__meta {
+    font-family: var(--fuente-mono);
+    font-size: 0.8rem;
+    color: var(--texto-suave);
+}
+
+.pedido__meta strong {
+    color: var(--rosa);
+}
+
+.pedido__items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.93rem;
+    width: 100%;
+    padding: 0.7rem 0;
+    border-top: 1px dashed var(--borde);
+    border-bottom: 1px dashed var(--borde);
+}
+
+.pedido__items--compacto {
+    padding: 0;
+    border: none;
+    font-size: 0.84rem;
+}
+
+.pedido__variante {
+    font-family: var(--fuente-mono);
+    font-size: 0.75rem;
+    color: var(--texto-suave);
+}
+
+.pedido__envio {
+    font-size: 0.86rem;
+    color: var(--texto-suave);
+}
+
+.pedido__envio strong {
+    color: var(--texto);
+}
+
+/* ===== Formulario de cupones ===== */
+.cupon-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1rem;
+    align-items: end;
+    margin-bottom: 1.8rem;
+    padding: 1.3rem;
+    background-color: var(--panel);
+    border: 2px solid var(--borde);
+}
+
+.cupon-form .formulario__campo input {
+    font-family: var(--fuente-texto);
+    font-size: 0.95rem;
+    padding: 0.6rem 0.8rem;
+    border: 2px solid var(--borde);
+    background-color: var(--panel-claro);
+    color: var(--texto);
+    color-scheme: dark;
 }

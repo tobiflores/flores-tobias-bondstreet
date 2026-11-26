@@ -5,6 +5,10 @@ import { CartProvider } from "./components/CartContext.jsx";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import RutaAdmin from "./components/RutaAdmin.jsx";
+import RutaPrivada from "./components/RutaPrivada.jsx";
+import MisPedidosPage from "./pages/MisPedidosPage.jsx";
+import AdminPedidosPage from "./pages/AdminPedidosPage.jsx";
+import AdminCuponesPage from "./pages/AdminCuponesPage.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import CatalogPage from "./pages/CatalogPage.jsx";
 import AdminPage from "./pages/AdminPage.jsx";
@@ -26,10 +30,34 @@ function App() {
                             <Route path="/login" element={<LoginPage />} />
                             <Route path="/registro" element={<RegisterPage />} />
                             <Route
+                                path="/mis-pedidos"
+                                element={
+                                    <RutaPrivada>
+                                        <MisPedidosPage />
+                                    </RutaPrivada>
+                                }
+                            />
+                            <Route
                                 path="/admin"
                                 element={
                                     <RutaAdmin>
                                         <AdminPage />
+                                    </RutaAdmin>
+                                }
+                            />
+                            <Route
+                                path="/admin/pedidos"
+                                element={
+                                    <RutaAdmin>
+                                        <AdminPedidosPage />
+                                    </RutaAdmin>
+                                }
+                            />
+                            <Route
+                                path="/admin/cupones"
+                                element={
+                                    <RutaAdmin>
+                                        <AdminCuponesPage />
                                     </RutaAdmin>
                                 }
                             />

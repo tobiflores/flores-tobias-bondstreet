@@ -22,19 +22,39 @@ async function request(url, opciones = {}) {
     return body.data;
 }
 
-export function crearPedido(items, token) {
+export function crearPedido(datos, token) {
     return request(API_URL, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({ items })
+        body: JSON.stringify(datos)
     });
 }
 
 export function obtenerMisPedidos(token) {
     return request(API_URL, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+}
+
+export function cancelarPedido(id, token) {
+    return request(`${API_URL}/${id}/cancelar`, {
+        method: "PUT",
+        headers: { Authorization: `Bearer ${token}` }
+    });
+}
+
+export function obtenerTodosPedidos(token) {
+    return request(`${API_URL}/todos`, {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+}
+
+export function avanzarEstadoPedido(id, token) {
+    return request(`${API_URL}/${id}/estado`, {
+        method: "PUT",
         headers: { Authorization: `Bearer ${token}` }
     });
 }
